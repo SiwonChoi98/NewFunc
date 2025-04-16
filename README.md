@@ -1,6 +1,6 @@
 # NewFunc
 
 Func
-- Object Pool
-- Red Dot
-- Skill Strategy Pattern
+- Object Pool (진행중)
+- Red Dot (진행중)
+- Skill Strategy Pattern (진행중)
