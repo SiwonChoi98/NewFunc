@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class Spawner : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         SpwanHero();
+        
         SpawnEnemy();
     }
 
@@ -22,14 +25,29 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    private async void SpawnEnemy()
     {
-        BasePoolObject basePoolObject = PoolManager.Instance.SpawnGameObject(PoolObjectType.ENEMY_GO, _enemyPrefab, new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0), Quaternion.identity);
+        while (true) // 무한 반복
+        {
+            await SpawnEnemyAsync();
+            await UniTask.Delay(3000);
+        }
+    }
+    private async UniTask SpawnEnemyAsync()
+    {
+        EnemySpawn enemySpawn = ResourceManager.Instance.GetInGameResourceData().EnemySpawn;
+        BasePoolObject enemySpawnObject = PoolManager.Instance.SpawnGameObject(PoolObjectType.ENEMY_SPAWN_GO, enemySpawn, new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0), Quaternion.identity);
+    
+        await UniTask.Delay(1000);
         
+        enemySpawnObject.ReturnToPool();
+        
+        BasePoolObject basePoolObject = PoolManager.Instance.SpawnGameObject(PoolObjectType.ENEMY_GO, _enemyPrefab, enemySpawnObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         Enemy enemy = basePoolObject as Enemy;
         if (enemy != null)
         {
             BattleManager.Instance.AddManagedEnemy(enemy);
         }
     }
+    
 }
