@@ -3,12 +3,7 @@ using UnityEngine;
 
 public class Hero : Actor
 {
-    private HeroAnimationController _heroAnimationController;
-    private HeroView _heroView;
     private HeroState _heroState;
-    
-    private Vector2 _moveInput;
-    [SerializeField] private float _moveSpeed = 5f;
     
     #region UnityLifeSycle
     private void FixedUpdate()
@@ -27,9 +22,6 @@ public class Hero : Actor
     protected override void SetComponent()
     {
         base.SetComponent();
-        
-        _heroAnimationController = GetComponentInChildren<HeroAnimationController>();
-        _heroView = GetComponentInChildren<HeroView>();
         
         //구조 다시 생각해봐야함
         _heroState = GetComponent<HeroState>();
@@ -50,7 +42,7 @@ public class Hero : Actor
         }
 
         //이동 애니메이션
-        _heroAnimationController.AnimMove(_moveInput);
+        _actorAnimationController.AnimMove(_moveInput);
     }
 
     //실제 입력 기반 이동
@@ -64,7 +56,12 @@ public class Hero : Actor
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _heroAnimationController.AnimAttack();
+            if (_actorAnimationController is HeroAnimationController)
+            {
+                HeroAnimationController heroAnimationController = _actorAnimationController as HeroAnimationController;
+                heroAnimationController.AnimAttack();
+            }
+            
         }
     }
     

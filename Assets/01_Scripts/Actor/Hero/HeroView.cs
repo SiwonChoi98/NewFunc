@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HeroView : MonoBehaviour
+public class HeroView : ActorView
 {
     
 }
