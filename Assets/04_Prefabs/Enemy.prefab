@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1, y: -1}
-  m_SizeDelta: {x: 1.5, y: 0.3}
+  m_AnchoredPosition: {x: -0.038, y: 0.4}
+  m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1611671189839418385
 CanvasRenderer:
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6949685, b: 0.6949685, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -104,7 +104,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 449300316534350168}
@@ -383,8 +383,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.21584553, y: -0.04083562}
-  m_Radius: 0.7566812
+  m_Offset: {x: -0.051805444, y: -0.04083556}
+  m_Radius: 0.25635892
 --- !u!50 &6156792047180062888
 Rigidbody2D:
   serializedVersion: 5
@@ -424,3 +424,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5d32f5739743745880dd7b41fa4ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 0.5
