@@ -34,7 +34,17 @@ public class PoolManager : Singleton<PoolManager>
     {
         foreach (var setting in sizeData.poolSettings)
         {
-            SetPoolMaxSize(setting.poolType, setting.maxSize);
+            if (PoolMaxSizeDictionary.ContainsKey(setting.poolType))
+            {
+                //에디터 상에서만 중복 경고 메세지 출력
+                #if UNITY_EDITOR 
+                    Debug.LogWarning($"중복된 풀 타입: {setting.poolType}. 첫번째 설정만 적용됩니다.");
+                #endif
+            }
+            else
+            {
+                SetPoolMaxSize(setting.poolType, setting.maxSize);
+            }
         }
     }
     //-----------------------------------------------------------

@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2953cc51aabe043bd0936f123cf313, type: 3}
   m_Name: PoolSizeData
   m_EditorClassIdentifier: 
-  poolSettings: []
+  poolSettings:
+  - poolType: 1001
+    maxSize: 10
+  - poolType: 1002
+    maxSize: 10
