@@ -60,6 +60,8 @@ public class Hero : Actor
             {
                 HeroAnimationController heroAnimationController = _actorAnimationController as HeroAnimationController;
                 heroAnimationController.AnimAttack();
+
+                BattleManager.Instance.RemoveManagedEnemies();
             }
             
         }

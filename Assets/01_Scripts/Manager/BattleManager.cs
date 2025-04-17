@@ -15,4 +15,11 @@ public class BattleManager : Singleton<BattleManager>
     {
         _managedEnemies.Add(enemy);
     }
+
+    public void RemoveManagedEnemies()
+    {
+        Enemy enemy = _managedEnemies[0];
+        _managedEnemies.RemoveAt(0);
+        enemy.ReturnToPool();
+    }
 }

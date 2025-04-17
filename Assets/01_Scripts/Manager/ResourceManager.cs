@@ -6,7 +6,6 @@ public class ResourceManager : Singleton<ResourceManager>
     private const string _inGameResourceDataPath = "InGameResourceData";
     private InGameResourceData _inGameResourceData;
 
-
     protected override void Awake()
     {
         base.Awake();
