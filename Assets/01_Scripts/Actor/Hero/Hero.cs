@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Hero : Actor
 {
-    private HeroState _heroState;
-    
     #region UnityLifeSycle
     private void FixedUpdate()
     {
@@ -22,9 +20,6 @@ public class Hero : Actor
     protected override void SetComponent()
     {
         base.SetComponent();
-        
-        //구조 다시 생각해봐야함
-        _heroState = GetComponent<HeroState>();
     }
 
     //입력
@@ -61,7 +56,7 @@ public class Hero : Actor
                 HeroAnimationController heroAnimationController = _actorAnimationController as HeroAnimationController;
                 heroAnimationController.AnimAttack();
 
-                BattleManager.Instance.RemoveManagedEnemies();
+                BattleManager.Instance.FirstEnemyDamage(30);
             }
             
         }

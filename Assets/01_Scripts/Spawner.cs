@@ -19,6 +19,7 @@ public class Spawner : MonoBehaviour
 
     private async void SpwanHero()
     {
+        //scriptableObject Data에서 받아오는 형태로 변경 예정
         string assetAddress = "Hero";
         var assetHero = await AddressableManager.Instance.LoadAssetAsync<GameObject>(assetAddress);
         if (assetHero == null)
@@ -37,6 +38,7 @@ public class Spawner : MonoBehaviour
         Hero hero = basePoolObject as Hero;
         if (hero != null)
         {
+            hero.GetComponent<ActorState>().SetHealth(100);
             BattleManager.Instance.SetManagedHero(hero);
         }
     }
@@ -94,6 +96,8 @@ public class Spawner : MonoBehaviour
         if (enemy != null)
         {
             enemy.Initalize(BattleManager.Instance.GetPlayerZoneT());
+            enemy.GetComponent<ActorState>().SetHealth(150);
+            
             BattleManager.Instance.AddManagedEnemy(enemy);
         }
     }

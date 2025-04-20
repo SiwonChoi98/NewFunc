@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5ef8fc43fd9444096820e66a19fd57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _actorCurrentHealthImage: {fileID: 1763073412080306334}
 --- !u!1 &5635265163807390025
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +204,7 @@ GameObject:
   - component: {fileID: 670399485882177942}
   - component: {fileID: 1654682902052884688}
   - component: {fileID: 4902585508136225461}
-  - component: {fileID: 5750584883732588418}
+  - component: {fileID: 8356955874210698147}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -304,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 2
---- !u!114 &5750584883732588418
+--- !u!114 &8356955874210698147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,7 +314,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5635265163807390025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8897bc688e7d54ea4dac0c85a83c2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 745114f77b518ad4fb4064270bc60273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5928507981536614342
@@ -451,7 +452,7 @@ GameObject:
   - component: {fileID: 782393489948889180}
   - component: {fileID: 1763073412080306334}
   m_Layer: 5
-  m_Name: ??
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

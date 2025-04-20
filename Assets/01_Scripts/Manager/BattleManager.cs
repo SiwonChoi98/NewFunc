@@ -19,17 +19,23 @@ public class BattleManager : Singleton<BattleManager>
         _managedHero = hero;
     }
 
+    public void RemoveManagedHero()
+    {
+        _managedHero = null;
+    }
+    
+    
     public void AddManagedEnemy(Enemy enemy)
     {
         _managedEnemies.Add(enemy);
     }
 
-    public void RemoveManagedEnemies()
+    public void RemoveManagedEnemy(Actor enemyActor)
     {
-        Enemy enemy = _managedEnemies[0];
-        _managedEnemies.RemoveAt(0);
-        enemy.ReturnToPool();
+        Enemy enemy =  enemyActor as Enemy;
+        _managedEnemies.Remove(enemy);
     }
+    
 
     #endregion
     #region Get
@@ -60,5 +66,10 @@ public class BattleManager : Singleton<BattleManager>
         
         SceneManager.LoadSceneAsync("InGame");
     }
-    
+
+    //TEST
+    public void FirstEnemyDamage(float damage)
+    {
+        _managedEnemies[0].ActorState.TakeDamage(damage);
+    }
 }

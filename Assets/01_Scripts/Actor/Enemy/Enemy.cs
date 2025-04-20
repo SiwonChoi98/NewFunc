@@ -22,7 +22,7 @@ public class Enemy : Actor
         if (other.CompareTag("PlayerZone"))
         {
             BattleManager.Instance.TakeDamage(5);
-            ReturnToPool();
+            RemoveActor();
         }
     }
 
