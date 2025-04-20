@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class PoolManager : Singleton<PoolManager>
 {
@@ -24,7 +25,7 @@ public class PoolManager : Singleton<PoolManager>
 
     private void SetPoolSizeData()
     {
-        _poolSizeData = Resources.Load<PoolSizeData>(_poolSizeDataPath);
+        _poolSizeData = Addressables.LoadAssetAsync<PoolSizeData>(_poolSizeDataPath).WaitForCompletion(); //동기
     }
     private void SetPoolMaxSize(PoolObjectType type, int maxSize)
     {
@@ -92,6 +93,16 @@ public class PoolManager : Singleton<PoolManager>
         {
             // 최대 크기 초과 시 파괴
             Destroy(poolObject.gameObject);
+            
+            
+            //addressable 메모리 해제
+            /*if (PoolDictionary[poolObjectType].Count == 0)
+            {
+                string address = poolObject.GetAssetAddress();
+                AddressableManager.Instance.ReleaseAsset(address);
+                ?
+                AddressableManager.Instance.ReleaseAssetInstance(poolObject);
+            }*/
         }
     }
 

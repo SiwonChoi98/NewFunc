@@ -148,8 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2fc8db0c68dc047b66cefafdbb1259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroPrefab: {fileID: 4902585508136225461, guid: 74168ef403c357840921fddf970fc231, type: 3}
-  _enemyPrefab: {fileID: 4914954947236965383, guid: d2465fbb8677af7429ef7a864092db30, type: 3}
   _enemySpawnPosList:
   - {fileID: 1734610355}
   - {fileID: 1494779782}
@@ -2761,9 +2759,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2068765163}
-  - component: {fileID: 2068765162}
+  - component: {fileID: 2068765165}
   - component: {fileID: 2068765161}
   - component: {fileID: 2068765164}
+  - component: {fileID: 2068765162}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -2824,6 +2823,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce0f8a623d0bb3d499e4dce09a14fad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDontDestroy: 0
+--- !u!114 &2068765165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068765160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401397efb8f88b144b59c27fe442eabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isDontDestroy: 0

@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Hero _heroPrefab;
-    [SerializeField] private Enemy _enemyPrefab;
-    
     [SerializeField] private List<Transform> _enemySpawnPosList;
     private void Start()
     {
@@ -16,9 +15,24 @@ public class Spawner : MonoBehaviour
         SpawnEnemy();
     }
 
-    private void SpwanHero()
+    #region Spawn
+
+    private async void SpwanHero()
     {
-        BasePoolObject basePoolObject = PoolManager.Instance.SpawnGameObject(PoolObjectType.HERO_GO, _heroPrefab, Vector3.zero, Quaternion.identity);
+        string assetAddress = "Hero";
+        var assetHero = await AddressableManager.Instance.LoadAssetAsync<GameObject>(assetAddress);
+        if (assetHero == null)
+        {
+            Debug.LogError("Failed Load Hero");
+            return;
+        }
+        
+        Hero heroPrefab = assetHero.GetComponent<Hero>();
+        
+        BasePoolObject basePoolObject = PoolManager.Instance.SpawnGameObject(PoolObjectType.HERO_GO, heroPrefab, Vector3.zero, Quaternion.identity);
+        
+        //주소 셋팅
+        basePoolObject.SetAssetAddress(assetAddress); 
         
         Hero hero = basePoolObject as Hero;
         if (hero != null)
@@ -35,18 +49,47 @@ public class Spawner : MonoBehaviour
             await UniTask.Delay(1000);
         }
     }
+
+    #endregion
+    
+    
     private async UniTask SpawnEnemyAsync()
     {
-        EnemySpawn enemySpawn = ResourceManager.Instance.GetInGameResourceData().EnemySpawn;
-
-        Vector3 randomPos = SetEnemyRandomPos();
-        BasePoolObject enemySpawnObject = PoolManager.Instance.SpawnGameObject(PoolObjectType.ENEMY_SPAWN_GO, enemySpawn, randomPos, Quaternion.identity);
-    
-        await UniTask.Delay(1000);
+        string assetEnemySpawnAddress = "EnemySpawn";
+        string assetEnemyAddress = "Enemy";
         
+        var assetEnemySpawn = await AddressableManager.Instance.LoadAssetAsync<GameObject>(assetEnemySpawnAddress);
+        if (assetEnemySpawn == null)
+        {
+            Debug.LogError("Failed Load EnemySpawn");
+            return;
+        }
+        EnemySpawn enemySpawn = assetEnemySpawn.GetComponent<EnemySpawn>();
+        
+        Vector3 randomPos = SetEnemyRandomPos();
+        BasePoolObject enemySpawnObject = 
+            PoolManager.Instance.SpawnGameObject(PoolObjectType.ENEMY_SPAWN_GO, enemySpawn, randomPos, Quaternion.identity);
+
+        enemySpawnObject.SetAssetAddress(assetEnemySpawnAddress);
+        
+        await UniTask.Delay(1000);
+    
         enemySpawnObject.ReturnToPool();
         
-        BasePoolObject basePoolObject = PoolManager.Instance.SpawnGameObject(PoolObjectType.ENEMY_GO, _enemyPrefab, enemySpawnObject.transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+        var assetEnemy = await AddressableManager.Instance.LoadAssetAsync<GameObject>(assetEnemyAddress);
+        if (assetEnemy == null)
+        {
+            Debug.LogError("Failed Load Enemy");
+            return;
+        }
+        
+        Enemy enemyObjectEnemy = assetEnemy.GetComponent<Enemy>();
+        
+        BasePoolObject basePoolObject = 
+            PoolManager.Instance.SpawnGameObject(PoolObjectType.ENEMY_GO, enemyObjectEnemy, enemySpawnObject.transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+        
+        basePoolObject.SetAssetAddress(assetEnemyAddress);
+        
         Enemy enemy = basePoolObject as Enemy;
         if (enemy != null)
         {
@@ -54,7 +97,7 @@ public class Spawner : MonoBehaviour
             BattleManager.Instance.AddManagedEnemy(enemy);
         }
     }
-
+    
     private Vector3 SetEnemyRandomPos()
     {
         int randomIndex = Random.Range(0, _enemySpawnPosList.Count);

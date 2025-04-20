@@ -4,11 +4,11 @@ using UnityEngine;
 [CustomEditor(typeof(PoolSizeData))]
 public class PoolSizeDataEditor : Editor
 {
-    /*
+    
     // 인스펙터 UI를 커스텀할 때 사용하는 메서드
-    public override void OnInspectorGUI()
+    /*public override void OnInspectorGUI()
     {
-        serializedObject.Update(); // SerializedObject의 상태를 최신으로 갱신
+        serializedObject.Update(); // 에디터가 그리는 값과 실제 오브젝트 값 사이를 동기화해주는 함수
 
         // 현재 에디터가 대상하고 있는 PoolSizeData 객체 가져오기
         PoolSizeData data = (PoolSizeData)target;
@@ -76,6 +76,7 @@ public class PoolSizeDataEditor : Editor
         serializedObject.ApplyModifiedProperties(); // 변경 사항 적용
         EditorUtility.SetDirty(data); // 데이터가 수정되었음을 Unity에 알림 (저장을 위해)
     }*/
+    
     
     private SerializedProperty poolSettingsProperty;
 
@@ -150,4 +151,5 @@ public class PoolSizeDataEditor : Editor
 
         serializedObject.ApplyModifiedProperties(); // 변경사항 반영
     }
+    
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : Singleton<BattleManager>
 {
@@ -44,8 +45,20 @@ public class BattleManager : Singleton<BattleManager>
 
     #endregion
 
+    
+    //TEST
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
     }
+    
+    //TEST
+    private void ChangeScene()
+    {
+        //기존 에셋 메모리 해제
+        AddressableManager.Instance.ReleaseAssetAll();
+        
+        SceneManager.LoadSceneAsync("InGame");
+    }
+    
 }

@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9749a5eb006f6ab4b9665a1ec92428ab, type: 3}
-  m_Name: InGameResourceData
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: DataGroup_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  EnemySpawn: {fileID: 7112016087693907117, guid: 52900c671648d284d97f435e5421e615, type: 3}
+  m_Group: {fileID: 11400000, guid: e6405390f822d9a44a3b61dc12257032, type: 2}
+  m_StaticContent: 0

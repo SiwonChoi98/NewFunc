@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ActorGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: ActorGroup
+  m_GUID: 1a718f621c40872479b5a7fb89f8c502
+  m_SerializeEntries:
+  - m_GUID: 52900c671648d284d97f435e5421e615
+    m_Address: EnemySpawn
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Actor
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74168ef403c357840921fddf970fc231
+    m_Address: Hero
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Actor
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f35c6673b1a70f42a0cb294be858816
+    m_Address: Default
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2465fbb8677af7429ef7a864092db30
+    m_Address: Enemy
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Actor
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7ae1b86b706b43948b9394a02e3f4a73, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d24bf6e18f5ae3245bc75d2809dae8b9, type: 2}
+    - {fileID: 11400000, guid: c82ee3a7f49f4284eb66c46a4cc9ae5e, type: 2}
