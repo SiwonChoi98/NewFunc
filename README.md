@@ -4,6 +4,9 @@
 
 [완료]
 
+- MVP Pattern
+  - Monster Data <- Present -> View 효율 적인 관리
+     
 - Object Pool
   - Custom Editor (PoolSize)
 
