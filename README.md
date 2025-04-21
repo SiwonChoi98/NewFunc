@@ -6,7 +6,7 @@
 
 - MVP Pattern
   - Monster Data <- Present -> View 효율 적인 관리
-     
+  [https://github.com/SiwonChoi98/NewFunc/tree/main/Assets/01_Scripts/Func/MVPPattern]
 - Object Pool
   - Custom Editor (PoolSize)
 
