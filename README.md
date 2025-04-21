@@ -100,7 +100,8 @@
 - Skill Strategy Pattern
 - Camera Shake Controller
 
+------------------------------------------------------------------------------------
 
-Resource
+Resource 사용처
 - Hero, Enemy : 직접 그림
 - Environment : 에셋 스토어
