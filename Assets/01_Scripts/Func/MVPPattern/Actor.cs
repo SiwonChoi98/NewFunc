@@ -43,7 +43,8 @@ public class Actor : BasePoolObject
         _actorView = GetComponentInChildren<ActorView>();
         _actorState = GetComponent<ActorState>();
     }
-
+    #endregion
+    
     /// <summary>
     /// MVP Pattern
     
@@ -90,5 +91,5 @@ public class Actor : BasePoolObject
         ReturnToPool();
     }
 
-    #endregion
+    
 }
