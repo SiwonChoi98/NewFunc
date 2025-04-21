@@ -16,7 +16,6 @@ public class AddressableManager : Singleton<AddressableManager>
     /// 1. Scriptable은 바로 해당 클래스로 접근 가능하다
     /// 2. GameObject는 GameObject 이후 GetComponent로 접근해야 함
     /// </summary>
-    /// <param name="주소"></param>
     /// <param name="address"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
@@ -85,30 +84,41 @@ public class AddressableManager : Singleton<AddressableManager>
             return null;
         }
     }
-    
-    // 에셋 해제
     public void ReleaseAsset(string address)
     {
-        Addressables.Release(address);
-    }
-    
-    public void ReleaseAssetInstance(GameObject addressableObject)
-    {
-        Addressables.ReleaseInstance(addressableObject);
+        if (_loadedAssets.TryGetValue(address, out AsyncOperationHandle handle))
+        {
+            Addressables.Release(handle);
+            _loadedAssets.Remove(address);
+        }
+        else
+        {
+            Debug.LogWarning($"[AddressableManager] Tried to release asset not tracked: {address}");
+        }
     }
     
     //전부 해제
     public void ReleaseAssetAll()
     {
-        foreach (var handleObj in _loadedAssets.Values)
+        foreach (AsyncOperationHandle handleObj in _loadedAssets.Values)
         {
-            if (handleObj is AsyncOperationHandle handle)
-            {
-                Addressables.Release(handle);
-            }
+            Addressables.Release(handleObj);
         }
 
         _loadedAssets.Clear();
     } 
+    
+    
+    //Addressable 생성
+    public AsyncOperationHandle<GameObject> InstantiateAssetInstance(string key)
+    {
+        return Addressables.InstantiateAsync(key);
+    }
+    
+    //Addressable 해제
+    public void ReleaseAssetInstance(GameObject addressableObject)
+    {
+        Addressables.ReleaseInstance(addressableObject);
+    }
     
 }

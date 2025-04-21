@@ -4,7 +4,7 @@ using UnityEngine.AddressableAssets;
 
 public class PoolManager : Singleton<PoolManager>
 {
-    private Dictionary<PoolObjectType, Queue<BasePoolObject>> PoolDictionary = new Dictionary<PoolObjectType, Queue<BasePoolObject>>();
+    private Dictionary<PoolObjectType, Queue<BasePoolObject>> _poolDictionary = new Dictionary<PoolObjectType, Queue<BasePoolObject>>();
     
     protected override void Awake()
     {
@@ -21,7 +21,7 @@ public class PoolManager : Singleton<PoolManager>
     //풀 사이즈 조정-------------------------------------------------
     private const string _poolSizeDataPath =  "PoolSizeData";
     private PoolSizeData _poolSizeData;
-    private Dictionary<PoolObjectType, int> PoolMaxSizeDictionary = new Dictionary<PoolObjectType, int>();
+    private Dictionary<PoolObjectType, int> _poolMaxSizeDictionary = new Dictionary<PoolObjectType, int>();
 
     private void SetPoolSizeData()
     {
@@ -29,13 +29,13 @@ public class PoolManager : Singleton<PoolManager>
     }
     private void SetPoolMaxSize(PoolObjectType type, int maxSize)
     {
-        PoolMaxSizeDictionary[type] = maxSize;
+        _poolMaxSizeDictionary[type] = maxSize;
     }
     public void ApplyPoolSizeSettings(PoolSizeData sizeData)
     {
         foreach (var setting in sizeData.poolSettings)
         {
-            if (PoolMaxSizeDictionary.ContainsKey(setting.poolType))
+            if (_poolMaxSizeDictionary.ContainsKey(setting.poolType))
             {
                 //에디터 상에서만 중복 경고 메세지 출력
                 #if UNITY_EDITOR 
@@ -77,39 +77,36 @@ public class PoolManager : Singleton<PoolManager>
         poolObject.transform.SetParent(parent);
         poolObject.gameObject.SetActive(false);
 
-        if (!PoolDictionary.ContainsKey(poolObjectType))
+        if (!_poolDictionary.ContainsKey(poolObjectType))
         {
-            PoolDictionary[poolObjectType] = new Queue<BasePoolObject>();
+            _poolDictionary[poolObjectType] = new Queue<BasePoolObject>();
         }
 
         //사이즈 정하지 않은 것은 최대 사이즈
-        int maxSize = PoolMaxSizeDictionary.ContainsKey(poolObjectType) ? PoolMaxSizeDictionary[poolObjectType] : int.MaxValue;
+        int maxSize = _poolMaxSizeDictionary.ContainsKey(poolObjectType) ? _poolMaxSizeDictionary[poolObjectType] : int.MaxValue;
 
-        if (PoolDictionary[poolObjectType].Count < maxSize)
+        if (_poolDictionary[poolObjectType].Count < maxSize)
         {
             EnqueuePoolObject(poolObjectType, poolObject);
         }
         else
         {
-            // 최대 크기 초과 시 파괴
+            //최대 크기 넘어가면 삭제
             Destroy(poolObject.gameObject);
             
-            
             //addressable 메모리 해제
-            /*if (PoolDictionary[poolObjectType].Count == 0)
+            if (_poolDictionary[poolObjectType].Count == 0)
             {
                 string address = poolObject.GetAssetAddress();
                 AddressableManager.Instance.ReleaseAsset(address);
-                ?
-                AddressableManager.Instance.ReleaseAssetInstance(poolObject);
-            }*/
+            }
         }
     }
 
     // private 생성/큐 관련 -----------------------------------------------------------------------
     private BasePoolObject SpawnFromPool(PoolObjectType poolObjectType, BasePoolObject poolObject, Vector3 position, Quaternion rotation)
     {
-        if (PoolDictionary.TryGetValue(poolObjectType, out Queue<BasePoolObject> queue) && queue.Count > 0)
+        if (_poolDictionary.TryGetValue(poolObjectType, out Queue<BasePoolObject> queue) && queue.Count > 0)
         {
             BasePoolObject poolObj = DequeuePoolObject(poolObjectType);
             poolObj.gameObject.SetActive(true);
@@ -121,7 +118,7 @@ public class PoolManager : Singleton<PoolManager>
 
     private BasePoolObject SpawnFromPool(PoolObjectType poolObjectType, BasePoolObject poolObject, Transform spawnTransform)
     {
-        if (PoolDictionary.TryGetValue(poolObjectType, out Queue<BasePoolObject> queue) && queue.Count > 0)
+        if (_poolDictionary.TryGetValue(poolObjectType, out Queue<BasePoolObject> queue) && queue.Count > 0)
         {
             BasePoolObject poolObj = DequeuePoolObject(poolObjectType);
             poolObj.transform.SetParent(spawnTransform);
@@ -144,11 +141,11 @@ public class PoolManager : Singleton<PoolManager>
 
     private BasePoolObject DequeuePoolObject(PoolObjectType poolObjectType)
     {
-        return PoolDictionary[poolObjectType].Dequeue();
+        return _poolDictionary[poolObjectType].Dequeue();
     }
 
     private void EnqueuePoolObject(PoolObjectType poolObjectType, BasePoolObject poolObject)
     {
-        PoolDictionary[poolObjectType].Enqueue(poolObject);
+        _poolDictionary[poolObjectType].Enqueue(poolObject);
     }
 }

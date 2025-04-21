@@ -12,7 +12,12 @@ public class Spawner : MonoBehaviour
     {
         SpwanHero();
         
-        SpawnEnemy();
+        //SpawnEnemy();
+    }
+
+    private void Update()
+    {
+        SpawnEnemy_Input();
     }
 
     #region Spawn
@@ -49,6 +54,14 @@ public class Spawner : MonoBehaviour
         {
             await SpawnEnemyAsync();
             await UniTask.Delay(1000);
+        }
+    }
+    
+    private void SpawnEnemy_Input()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            _ = SpawnEnemyAsync();
         }
     }
 
