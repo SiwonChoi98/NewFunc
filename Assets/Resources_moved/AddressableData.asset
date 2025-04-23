@@ -10,9 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9749a5eb006f6ab4b9665a1ec92428ab, type: 3}
-  m_Name: InGameResourceData
+  m_Name: AddressableData
   m_EditorClassIdentifier: 
-  EnemySpawn:
+  HeroPrefab:
+    m_AssetGUID: 74168ef403c357840921fddf970fc231
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  EnemyPrefab:
+    m_AssetGUID: d2465fbb8677af7429ef7a864092db30
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  EnemySpawnPrefab:
     m_AssetGUID: 52900c671648d284d97f435e5421e615
     m_SubObjectName: 
     m_SubObjectGUID: 

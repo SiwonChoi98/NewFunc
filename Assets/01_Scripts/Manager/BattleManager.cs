@@ -62,7 +62,7 @@ public class BattleManager : Singleton<BattleManager>
     private void ChangeScene()
     {
         //기존 에셋 메모리 해제
-        AddressableManager.Instance.ReleaseAssetAll();
+        //AddressableManager.Instance.ReleaseAssetAll();
         
         SceneManager.LoadSceneAsync("InGame");
     }

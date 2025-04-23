@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class PoolManager : Singleton<PoolManager>
 {
@@ -52,19 +54,26 @@ public class PoolManager : Singleton<PoolManager>
 
     // 생성 -----------------------------------------------------------------------
 
-    public BasePoolObject SpawnGameObject(PoolObjectType poolObjectType, BasePoolObject basePoolObject, Vector3 pos, Quaternion rotaion)
+    public async UniTask<BasePoolObject> SpawnGameObject(PoolObjectType poolObjectType, AssetReference asset, Vector3 pos, Quaternion rotation)
     {
-        BasePoolObject poolObject = SpawnFromPool(poolObjectType, basePoolObject, pos, rotaion);
+        BasePoolObject poolObject = await SpawnFromPool(poolObjectType, asset, pos, rotation);
+    
+        if (poolObject == null)
+        {
+            Debug.LogError($"Failed to spawn object of type {poolObjectType}");
+            return null;
+        }
+
         poolObject.SetPoolObjectType(poolObjectType);
         return poolObject;
     }
 
-    public BasePoolObject SpawnUI(PoolObjectType poolObjectType, BasePoolObject basePoolObject, Transform transformUI)
+    /*public BasePoolObject SpawnUI(PoolObjectType poolObjectType, AssetReference asset, Transform transformUI)
     {
-        BasePoolObject poolObject = SpawnFromPool(poolObjectType, basePoolObject, transformUI);
+        BasePoolObject poolObject = SpawnFromPool(poolObjectType, asset, transformUI);
         poolObject.SetPoolObjectType(poolObjectType);
         return poolObject;
-    }
+    }*/
 
     // 해제 -----------------------------------------------------------------------
     public void ReturnToPool(PoolObjectType poolObjectType, BasePoolObject poolObject)
@@ -91,20 +100,12 @@ public class PoolManager : Singleton<PoolManager>
         }
         else
         {
-            //최대 크기 넘어가면 삭제
-            Destroy(poolObject.gameObject);
-            
-            //addressable 메모리 해제
-            if (_poolDictionary[poolObjectType].Count == 0)
-            {
-                string address = poolObject.GetAssetAddress();
-                AddressableManager.Instance.ReleaseAsset(address);
-            }
+            AddressableManager.Instance.ReleaseAssetInstance(poolObject.gameObject);
         }
     }
 
     // private 생성/큐 관련 -----------------------------------------------------------------------
-    private BasePoolObject SpawnFromPool(PoolObjectType poolObjectType, BasePoolObject poolObject, Vector3 position, Quaternion rotation)
+    private async UniTask<BasePoolObject> SpawnFromPool(PoolObjectType poolObjectType, AssetReference asset, Vector3 position, Quaternion rotation)
     {
         if (_poolDictionary.TryGetValue(poolObjectType, out Queue<BasePoolObject> queue) && queue.Count > 0)
         {
@@ -113,10 +114,31 @@ public class PoolManager : Singleton<PoolManager>
             poolObj.transform.SetPositionAndRotation(position, rotation);
             return poolObj;
         }
-        return CreatePoolObject(poolObject, position, rotation);
-    }
+        
+        GameObject newObj = await CreatePoolObjectAsync(asset, position, rotation);
+        if (newObj == null)
+        {
+            return null;
+        }
 
-    private BasePoolObject SpawnFromPool(PoolObjectType poolObjectType, BasePoolObject poolObject, Transform spawnTransform)
+        return newObj.GetComponent<BasePoolObject>();
+    }
+    private async UniTask<GameObject> CreatePoolObjectAsync(AssetReference asset, Vector3 pos, Quaternion rotation)
+    {
+        var handle = asset.InstantiateAsync(pos, rotation);
+        await handle.ToUniTask();
+
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.LogError($"Failed to instantiate object from asset: {asset.RuntimeKey}");
+            return null;
+        }
+
+        return handle.Result;
+    }
+    
+
+    /*private BasePoolObject SpawnFromPool(PoolObjectType poolObjectType, AssetReference asset, Transform spawnTransform)
     {
         if (_poolDictionary.TryGetValue(poolObjectType, out Queue<BasePoolObject> queue) && queue.Count > 0)
         {
@@ -126,18 +148,16 @@ public class PoolManager : Singleton<PoolManager>
             poolObj.gameObject.SetActive(true);
             return poolObj;
         }
-        return CreatePoolObject(poolObject, spawnTransform);
-    }
 
-    private BasePoolObject CreatePoolObject(BasePoolObject poolObject, Vector3 pos, Quaternion rotation)
-    {
-        return Instantiate(poolObject, pos, rotation);
+        AsyncOperationHandle<GameObject> newObject = CreatePoolObject(asset, spawnTransform);
+        return newObject.Result.GetComponent<BasePoolObject>();;
     }
+    */
 
-    private BasePoolObject CreatePoolObject(BasePoolObject poolObject, Transform spawnTransform)
+    /*private AsyncOperationHandle<GameObject> CreatePoolObject(AssetReference asset, Transform spawnTransform)
     {
-        return Instantiate(poolObject, spawnTransform);
-    }
+        return asset.InstantiateAsync(spawnTransform);
+    }*/
 
     private BasePoolObject DequeuePoolObject(PoolObjectType poolObjectType)
     {

@@ -22,7 +22,7 @@ MonoBehaviour:
     - Data
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5975868539f683f489e22396d0cd5090
-    m_Address: InGameResourceData
+    m_Address: AddressableData
     m_ReadOnly: 0
     m_SerializedLabels:
     - Data
