@@ -125,7 +125,7 @@ public class PoolManager : Singleton<PoolManager>
     }
     private async UniTask<GameObject> CreatePoolObjectAsync(AssetReference asset, Vector3 pos, Quaternion rotation)
     {
-        var handle = asset.InstantiateAsync(pos, rotation);
+        var handle = AddressableManager.Instance.InstantiateAssetInstance(asset, pos, rotation);
         await handle.ToUniTask();
 
         if (handle.Status != AsyncOperationStatus.Succeeded)
