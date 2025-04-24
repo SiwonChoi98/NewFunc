@@ -87,18 +87,48 @@
 
 ------------------------------------------------------------------------------------
 
-
-## [진행중]
-
-- Addressable
+### Addressable
   - Manager를 통한 효율적인 관리
   - Object Pool과 연동
 
+ [https://github.com/SiwonChoi98/NewFunc/tree/main/Assets/01_Scripts/Func/Addressable]
+
+ Addressable 과 Object Pool을 통해서 에셋 메모리와 인스턴스 메모리의 최적화
+
+*AddressableManager
+ - 에셋 로딩과 해제를 Addressables 방식으로 통합 관리하는 클래스
+*PoolManager
+- Dictionary<PoolObjectType, Queue<BasePoolObject>>를 사용한 객체 풀링 시스템
+- Addressables를 통해 객체를 동적으로 생성하거나 재사용
+
+객체 생성/재사용 (SpawnGameObject):
+- 먼저 큐에서 재사용 가능한 객체를 가져오고, 없으면 Addressables로 로드
+- 새로운 객체 생성 시 BasePoolObject를 통해 관리
+
+객체 반환 (ReturnToPool):
+- 오브젝트를 비활성화하고 큐에 다시 저장
+- 최대 크기 초과 시 Addressables 인스턴스를 해제
+
+특징 
+- 풀 크기 제한을 두어 메모리 누수를 방지
+- 비동기 Addressables 로드와 객체 재사용의 조화
+- 에디터 전용 경고로 설정 중복 방지
+
+장점
+- 비동기 Addressables + Object Pooling 조합 → 메모리 효율성과 성능 최적화
+- 확장 가능하고 유지보수 쉬운 구조
+- PoolObjectType 기반으로 유연하게 관리 가능
+- ScriptableObject로 설정 관리하여 디자이너 친화적
+  
+------------------------------------------------------------------------------------
+
+## [진행중]
+- Cinemachine Camera Shake Controller
+  
 ## [계획]
 
 - Red Dot
 - Skill Strategy Pattern
-- Camera Shake Controller
 
 ------------------------------------------------------------------------------------
 
