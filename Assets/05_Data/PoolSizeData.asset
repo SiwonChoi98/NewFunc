@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolSettings:
   - poolType: 1002
-    maxSize: 0
+    maxSize: 20
   - poolType: 1003
     maxSize: 10

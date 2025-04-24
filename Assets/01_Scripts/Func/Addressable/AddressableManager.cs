@@ -35,10 +35,16 @@ public class AddressableManager : Singleton<AddressableManager>
         }
     }
     
+    
     //Addressable 생성
     public AsyncOperationHandle<GameObject> InstantiateAssetInstance(AssetReference prefab, Vector3 pos, Quaternion rot)
     {
         return prefab.InstantiateAsync(pos, rot);
+        /*myPrefab.InstantiateAsync().Completed += handle =>
+        {
+            GameObject obj = handle.Result;
+            // 생성된 오브젝트 사용 가능
+        };*/
     }
     
     //Addressable 해제
@@ -53,5 +59,9 @@ public class AddressableManager : Singleton<AddressableManager>
         //Test용 즉시 해제
         //Resources.UnloadUnusedAssets();
     }
-    
+
+    public void ReleaseAsset(AsyncOperationHandle<GameObject> addressableObject)
+    {
+        Addressables.Release(addressableObject);
+    }
 }
