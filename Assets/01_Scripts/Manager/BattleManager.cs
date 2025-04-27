@@ -60,7 +60,7 @@ public class BattleManager : Singleton<BattleManager>
         //현재 활성화된 VirtualCamera 가져오기 (ICinemachineCamera 타입)
         ICinemachineCamera activeCam = _mainCamera.ActiveVirtualCamera;
         //VirtualCameraGameObject를 통해 GameObject 접근
-        CinemachineCamera camObj = (activeCam as CinemachineVirtualCameraBase)?.GetComponent<CinemachineCamera>();
+        CinemachineCamera camObj = (activeCam as CinemachineVirtualCameraBase) as CinemachineCamera;
         
         CameraShake cameraShake = camObj?.GetComponent<CameraShake>();
         cameraShake?.Shake(intensity, duration); // 원하는 세기로 흔들기

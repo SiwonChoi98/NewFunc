@@ -10,3 +10,9 @@ public enum PoolObjectType
     ENEMY_SPAWN_GO = 1005,
     
 }
+
+public enum SkillType
+{
+    CHAINLIGHTING = 1001,
+    ORDER = 1002,
+}

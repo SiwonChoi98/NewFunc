@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a8078f6629b364fa4bf25ab896f552, type: 3}
+  m_Name: ChainLightningData
+  m_EditorClassIdentifier: 
+  SkillType: 1001
+  Base_SkillDamage: 10
+  Base_SkillCooltime: 2
+  Base_SkillDistance: 5
+  Base_SkillHitCount: 3
+  Base_SkillSpawnCount: 1
+  SkillBehaviour: {fileID: 11400000, guid: a3fe048e84e789043a56f70368e457b4, type: 2}

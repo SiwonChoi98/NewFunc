@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Hero : Actor
 {
+    private HeroAttack _heroAttack;
+    
     #region UnityLifeSycle
     private void FixedUpdate()
     {
@@ -13,6 +15,7 @@ public class Hero : Actor
     {
         InputMove();
         InputAttack();
+        InputSetSkillData();
     }
     
     #endregion
@@ -20,6 +23,8 @@ public class Hero : Actor
     protected override void SetComponent()
     {
         base.SetComponent();
+
+        _heroAttack = GetComponent<HeroAttack>();
     }
 
     //입력
@@ -56,9 +61,25 @@ public class Hero : Actor
                 HeroAnimationController heroAnimationController = _actorAnimationController as HeroAnimationController;
                 heroAnimationController.AnimAttack();
 
-                BattleManager.Instance.FirstEnemyDamage(30);
+                _heroAttack.Attack();
+                //BattleManager.Instance.FirstEnemyDamage(30);
             }
             
+        }
+    }
+
+    private void InputSetSkillData()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Base_SkillData skillData = ResourceManager.Instance.GetBaseSkillData(SkillType.CHAINLIGHTING);
+            _heroAttack.SetSkillData(skillData);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Base_SkillData skillData = ResourceManager.Instance.GetBaseSkillData(SkillType.ORDER);
+            _heroAttack.SetSkillData(skillData);
         }
     }
     

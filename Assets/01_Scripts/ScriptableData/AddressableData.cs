@@ -7,4 +7,8 @@ public class AddressableData : ScriptableObject
     public AssetReference HeroPrefab;
     public AssetReference EnemyPrefab;
     public AssetReference EnemySpawnPrefab;
+
+    [Header("SkillObject")] 
+    public AssetReference TrailSkillPrefab;
+    public AssetReference DefaultSkillPrefab;
 }

@@ -30,3 +30,15 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  TrailSkillPrefab:
+    m_AssetGUID: c9f7e7e77ee63a046949b320fc0a214b
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  DefaultSkillPrefab:
+    m_AssetGUID: 2b5deacc7a72cfe4982266fb547703ff
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

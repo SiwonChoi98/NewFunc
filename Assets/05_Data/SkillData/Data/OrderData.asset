@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1403be6bb6aad4894f4cc76240f754, type: 3}
+  m_Name: OrderData
+  m_EditorClassIdentifier: 
+  SkillType: 1002
+  Base_SkillDamage: 5
+  Base_SkillCooltime: 3
+  Base_SkillDistance: 10
+  Base_SkillHitCount: 5
+  Base_SkillSpawnCount: 3
+  SkillBehaviour: {fileID: 11400000, guid: 2c4eb2822ea62c94fa58eb49af4dbc2c, type: 2}

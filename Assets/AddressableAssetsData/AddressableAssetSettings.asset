@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: e99210dc5d500194c8215eaaa8cccf22
   m_currentHash:
     serializedVersion: 2
-    Hash: 7ae10875f261f04d422796fb2d69a08e
+    Hash: 2f3338647647aa591bb4efa462ac850d
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
@@ -60,7 +60,9 @@ MonoBehaviour:
   m_overridePlayerVersion: ver1
   m_GroupAssets:
   - {fileID: 11400000, guid: 675a23880497c1f4d88508cb0c7d0451, type: 2}
+  - {fileID: 11400000, guid: 18666a328dab9e844bb6a78ee1d33598, type: 2}
   - {fileID: 11400000, guid: e6405390f822d9a44a3b61dc12257032, type: 2}
+  - {fileID: 11400000, guid: 85173ae3b4fa904478d76915a1839263, type: 2}
   - {fileID: 11400000, guid: fae944ae6ba38d941a43e13ff2f9ab41, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
@@ -118,6 +120,7 @@ MonoBehaviour:
     - Data
     - Actor
     - Material
+    - SkillData
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 6e487daf3d7ad524d9fab2d041e16655, type: 2}
