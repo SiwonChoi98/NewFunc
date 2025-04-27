@@ -4,6 +4,7 @@ using UnityEngine.AddressableAssets;
 public class Base_SkillData : ScriptableObject
 {
     public SkillType SkillType;
+    public SkillTargetType TargetType;
     
     public float Base_SkillDamage;
     public float Base_SkillCooltime;

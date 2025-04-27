@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1403be6bb6aad4894f4cc76240f754, type: 3}
   m_Name: OrderData
   m_EditorClassIdentifier: 
-  SkillType: 1002
+  SkillType: 2
+  TargetType: 1
   Base_SkillDamage: 5
   Base_SkillCooltime: 3
   Base_SkillDistance: 10
