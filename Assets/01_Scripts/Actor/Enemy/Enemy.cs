@@ -14,7 +14,7 @@ public class Enemy : Actor
     #region UnityLifeSycle
     private void FixedUpdate()
     {
-        Move();
+        //Move();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

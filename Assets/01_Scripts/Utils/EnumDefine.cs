@@ -14,14 +14,30 @@ public enum PoolObjectType
     
 }
 
-public enum SkillType
+public enum SkillNameType
 {
     CHAINLIGHTING = 1,
     ORDER = 2,
 }
 
-public enum SkillTargetType
+/*public enum SkillBehaviourType
+{
+    NONE = 0,
+    BULLET = 1,
+    MELEE = 2,
+    HEAL = 3,
+    BUFF = 4,
+    DEBUFF = 5,
+}*/
+
+public enum SkillTargetFindType
 {
     NONE = 1,       // 목표 없음
     CLOSEST = 2,    // 가장 가까운 적
+}
+
+public enum TargetLayerType
+{
+    Enemy = 1,
+    Hero = 2,
 }

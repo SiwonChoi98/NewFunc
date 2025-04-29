@@ -8,13 +8,21 @@ public class ChainLightningSkill : SkillBehaviour
     {
         Debug.Log("ChainLightning Skill Execute");
         SpawnObject(_owner.position, Quaternion.identity);
-        
-        _target?.GetComponent<ActorState>().TakeDamage(20);
     }
     
-    public override void SpawnObject(Vector3 position, Quaternion rotation)
+    public override async void SpawnObject(Vector3 position, Quaternion rotation)
     {
-        AssetReference prefab = AddressableManager.Instance.GetInGameResourceData().TrailSkillPrefab;
-        _ = PoolManager.Instance.SpawnGameObject(PoolObjectType.SKILL_CHAINLIGHTNING_GO, prefab, position, rotation);
+        AssetReference prefab = AddressableManager.Instance.GetInGameResourceData().ChainLightningSkillPrefab;
+        BasePoolObject spawnObject = await PoolManager.Instance.SpawnGameObject(PoolObjectType.SKILL_CHAINLIGHTNING_GO, prefab, position, rotation);
+        
+        ChainLightningBullet bullet = spawnObject as ChainLightningBullet;
+        if (bullet == null)
+            return;
+        
+        spawnObject.GetComponentInChildren<TrailRenderer>().Clear();
+        
+        int targetLayerNum = Utill.GetTargetLayerTypeToLayerNumber(TargetLayerType.Enemy);
+        
+        bullet.Initialize(GetBulletInfo(), _target, _owner, targetLayerNum);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class ResourceManager : Singleton<ResourceManager>
 {
-    private Dictionary<SkillType, Base_SkillData> _baseSkillDatas = new Dictionary<SkillType, Base_SkillData>();
+    private Dictionary<SkillNameType, Base_SkillData> _baseSkillDatas = new Dictionary<SkillNameType, Base_SkillData>();
 
     
 
@@ -23,7 +23,7 @@ public class ResourceManager : Singleton<ResourceManager>
             {
                 foreach (var obj in handle.Result)
                 {
-                    _baseSkillDatas[obj.SkillType] = obj;
+                    _baseSkillDatas[obj.skillNameType] = obj;
                 }
             }
             else
@@ -32,5 +32,5 @@ public class ResourceManager : Singleton<ResourceManager>
             }
         };
     }
-    public Base_SkillData GetBaseSkillData(SkillType skillType) => _baseSkillDatas[skillType];
+    public Base_SkillData GetBaseSkillData(SkillNameType skillNameType) => _baseSkillDatas[skillNameType];
 }

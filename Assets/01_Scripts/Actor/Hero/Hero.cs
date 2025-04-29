@@ -72,14 +72,14 @@ public class Hero : Actor
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Base_SkillData skillData = ResourceManager.Instance.GetBaseSkillData(SkillType.CHAINLIGHTING);
+            Base_SkillData skillData = ResourceManager.Instance.GetBaseSkillData(SkillNameType.CHAINLIGHTING);
             _heroAttack.SetSkillData(skillData);
             _heroAttack.SetOwner(this.transform);
         }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Base_SkillData skillData = ResourceManager.Instance.GetBaseSkillData(SkillType.ORDER);
+            Base_SkillData skillData = ResourceManager.Instance.GetBaseSkillData(SkillNameType.ORDER);
             _heroAttack.SetSkillData(skillData);
             _heroAttack.SetOwner(this.transform);
         }

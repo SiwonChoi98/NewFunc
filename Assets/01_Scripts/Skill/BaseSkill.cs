@@ -1,16 +1,19 @@
+using System;
 using UnityEngine;
 
 public class BaseSkill : MonoBehaviour
 {
     private Base_SkillData _baseSkillData;
-
     #region Set
-    public void SetSkillData(Base_SkillData baseSkillData) => _baseSkillData = baseSkillData;
+    public void SetSkillData(Base_SkillData baseSkillData)
+    {
+        _baseSkillData = baseSkillData;
+        _baseSkillData.SkillBehaviour?.SetData(_baseSkillData.DefaultData, _baseSkillData.BulletData);
+    }
+
     public void SetOwner(Transform owner) => _baseSkillData?.SkillBehaviour.SetOwner(owner);
-    public void SetTarget(Transform target) => _baseSkillData?.SkillBehaviour.SetTarget(target);
     #endregion
     
-
     public void SkillAttack()
     {
         _baseSkillData?.SkillBehaviour.SetTarget(FindTarget());
@@ -25,11 +28,11 @@ public class BaseSkill : MonoBehaviour
     /// <returns></returns>
     public Transform FindTarget()
     {
-        switch (_baseSkillData.TargetType)
+        switch (_baseSkillData.targetFindType)
         {
-            case SkillTargetType.NONE:
+            case SkillTargetFindType.NONE:
                 return null;
-            case SkillTargetType.CLOSEST:
+            case SkillTargetFindType.CLOSEST:
                 return FindClosest();
         }
 
@@ -38,7 +41,7 @@ public class BaseSkill : MonoBehaviour
 
     private Transform FindClosest()
     {
-        float searchRadius = _baseSkillData.Base_SkillDistance;
+        float searchRadius = _baseSkillData.DefaultData.Base_SkillDistance;
         LayerMask targetLayer = LayerMask.GetMask("Enemy");
         
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, searchRadius, targetLayer);

@@ -16,12 +16,12 @@ MonoBehaviour:
   m_GUID: af5cd50a15601ea40bef2c73570ff138
   m_SerializeEntries:
   - m_GUID: 2b5deacc7a72cfe4982266fb547703ff
-    m_Address: Skill_Default
+    m_Address: Skill_Order
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c9f7e7e77ee63a046949b320fc0a214b
-    m_Address: Skill_Trail
+    m_Address: Skill_ChainLightning
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

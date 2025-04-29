@@ -9,6 +9,6 @@ public class AddressableData : ScriptableObject
     public AssetReference EnemySpawnPrefab;
 
     [Header("SkillObject")] 
-    public AssetReference TrailSkillPrefab;
-    public AssetReference DefaultSkillPrefab;
+    public AssetReference ChainLightningSkillPrefab;
+    public AssetReference OrderSkillPrefab;
 }
