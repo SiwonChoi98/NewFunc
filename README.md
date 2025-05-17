@@ -119,16 +119,14 @@
 - 확장 가능하고 유지보수 쉬운 구조
 - PoolObjectType 기반으로 유연하게 관리 가능
 - ScriptableObject로 설정 관리하여 디자이너 친화적
-  
+
+### Cinemachine Camera Shake Controller
+
+### Skill Strategy Pattern
+
 ------------------------------------------------------------------------------------
 
 ## [진행중]
-- Cinemachine Camera Shake Controller
-  
-## [계획]
-
-- Red Dot
-- Skill Strategy Pattern
 
 ------------------------------------------------------------------------------------
 
