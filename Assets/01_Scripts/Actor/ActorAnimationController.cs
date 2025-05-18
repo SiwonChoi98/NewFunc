@@ -1,5 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-
+using Cysharp.Threading.Tasks;
 public class ActorAnimationController : MonoBehaviour
 {
     private readonly int _isMove = Animator.StringToHash("IsMove");

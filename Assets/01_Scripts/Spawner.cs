@@ -7,13 +7,16 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<Transform> _enemySpawnPosList;
+    
+    [SerializeField] private int _enemySpawnCount;
     private async void Start()
     {
         await UniTask.WaitUntil(() => AddressableManager.Instance.GetInGameResourceData() != null);
         
-        SpwanHero();
+        //SpwanHero();
         
         //SpawnEnemy();
+        SpawnEnemy_Count();
     }
 
     private void Update()
@@ -52,6 +55,13 @@ public class Spawner : MonoBehaviour
     private void SpawnEnemy_Input()
     {
         if (Input.GetKeyDown(KeyCode.P))
+        {
+            _ = SpawnEnemyAsync();
+        }
+    }
+    private void SpawnEnemy_Count()
+    {
+        for (int i = 0; i < _enemySpawnCount; i++)
         {
             _ = SpawnEnemyAsync();
         }

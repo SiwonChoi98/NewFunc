@@ -167,6 +167,7 @@ MonoBehaviour:
   - {fileID: 1297691049}
   - {fileID: 1927476478}
   - {fileID: 710177081}
+  _enemySpawnCount: 1000
 --- !u!4 &13053189
 Transform:
   m_ObjectHideFlags: 0
